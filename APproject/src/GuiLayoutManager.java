@@ -14,28 +14,25 @@ import javax.swing.JTextField;
 public class GuiLayoutManager implements ActionListener {
 //Card layout
 	private JPanel cards;
-	final static String QUERY1 = "Query1";
-	final static String QUERY2 = "Query2";
-	
 	public void addComponentsToPane(Container pane)
 	{
 		 	JPanel comboBoxPane = new JPanel(); //made a new panel to hold all the cards
+			final String QUERY1 = "Query1";
+			final String QUERY2 = "Query2";
+			
+
 	        String comboBoxItems[] = { QUERY1, QUERY2}; // added first combobox items
 	        JComboBox<String> cb = new JComboBox(comboBoxItems);
 	        cb.setEditable(false);
 	        cb.addActionListener(this);
 	        comboBoxPane.add(cb);
-	        
-	        JPanel card1 = new JPanel(); // beginning card
-	        //String a[] = {"a","b"}; 
-	        //card1.add(new JComboBox<String>(a));
-	        
+	        JPanel emptyCard = new JPanel();
 	        JPanel card2 = new JPanel();
-	        card2.add(new JTextField("TextField", 20));
-	        
+	        card2.add(new JTextField("TextField", 20));      
 	        //Create the panel that contains the "cards".
 	        cards = new JPanel(new CardLayout());
-	        cards.add(card1, QUERY1);
+	        cards.add(emptyCard);
+	        cards.add(createAndGetCard1(), QUERY1);
 	        cards.add(card2, QUERY2);
 	        
 	        pane.add(comboBoxPane, BorderLayout.PAGE_START);
@@ -43,10 +40,12 @@ public class GuiLayoutManager implements ActionListener {
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CardLayout c1 = (CardLayout)(cards.getLayout());
+		CardLayout c1 = (CardLayout)(cards.getLayout());  
 		JComboBox<String > got = (JComboBox<String>)e.getSource();
 		System.out.println(got.getItemAt((got.getSelectedIndex())));
 		c1.show(cards,got.getItemAt((got.getSelectedIndex())));
+		
+		
 		
 	}
 	public static void main(String[] args) {
@@ -71,7 +70,38 @@ public class GuiLayoutManager implements ActionListener {
         frame.pack();
         frame.setVisible(true);
     }
-    
-	
+    public JPanel createAndGetCard1() {
+    	
+    	JPanel card1 = new JPanel();
+    	String[] searchByList= {"By Name","By Author"};
+    	 JComboBox<String> searchByComboBox = new JComboBox<>(searchByList); 
+    	 searchByComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add a new card to cards===============");
+				
+			}
+		});
+		card1.add(searchByComboBox);
+		return card1;
+	}
+    public JPanel createAndGetCard2() {
+    	
+    	JPanel card1 = new JPanel();
+    	String[] searchByList= {"By Name","By Author"};
+    	 JComboBox<String> searchByComboBox = new JComboBox<>(searchByList); 
+    	 searchByComboBox.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Add a new card to cards===============");
+				
+			}
+		});
+		card1.add(searchByComboBox);
+		return card1;
+	}
+
 
 }
