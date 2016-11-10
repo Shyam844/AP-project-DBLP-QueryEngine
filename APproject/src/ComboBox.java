@@ -1,25 +1,18 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-public class ComboBox implements ActionListener{
-	Query gotQuery;
-	JPanel leftPanel;
-	public ComboBox(Query gotQuery, JPanel leftPanel) {
-		this.gotQuery = gotQuery;
-		this.leftPanel = leftPanel;
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
+public class ComboBox extends JComboBox<Query> {
+	//private Query [] qList;
+	private JComboBox<Query> queryList; 
+	public ComboBox(Query [] qList) {
+		super(qList);
+		setSelectedIndex(0);
+		addActionListener(qList[0]);
 		
 	}
-	public void addToPanel()
-	{
-		
-	}
-	
 	
 	
 

@@ -6,6 +6,7 @@ public class mainClass {
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+
 				DisplayWindow sampleDW = new DisplayWindow("DBLP QUERY ENGINE");
 				sampleDW.setVisible(true);
 			}

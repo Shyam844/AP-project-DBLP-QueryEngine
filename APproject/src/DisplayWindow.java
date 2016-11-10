@@ -16,18 +16,18 @@ import javax.tools.Tool;
 public class DisplayWindow extends JFrame{
 	
 	private static final long serialVersionUID = 1L; //To make serealizable
-	private JPanel leftPanel,rightPanel;
-	private int numberOfQueries = 3;
+	public JPanel leftPanel,rightPanel;
+	private Query [] qList ;
 	public DisplayWindow(String title) {
 		setTitle(title);
 		setLocationByPlatform(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
+		//this.qList= qList;
 		initializeAllPanels();
 		add(leftPanel);
 		add(rightPanel);
-		pack();
-
+		setBounds(0, 0, 200, 200);
 	}
 	public DisplayWindow() {
 		super("");
@@ -41,12 +41,15 @@ public class DisplayWindow extends JFrame{
 	private void initializeLeftPanel()
 	{
 		leftPanel = new JPanel();
+		Query [] qList =  {new QueryType1("Query1",leftPanel)};
+		leftPanel.add(new ComboBox(qList));
 		
-		Query [] qList =  {new QueryType1("Query1", leftPanel)};
-		
-		JComboBox<Query> queryList = new JComboBox<Query>(qList);
-		leftPanel.add(queryList);
-		queryList.addActionListener(new ActionListener() {
+		/*JComboBox<Query> queryList = new JComboBox<Query>(qList);
+		queryList.setSelectedIndex(0);
+		queryList.addActionListener(qList[0]);
+		leftPanel.add(queryList);*/
+
+/*		queryList.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -54,7 +57,7 @@ public class DisplayWindow extends JFrame{
 				int index = cb.getSelectedIndex();
 				qList[index].attach();
 			}
-		});
+		});*/
 	}
 	private void initializeRightPanel()
 	{
